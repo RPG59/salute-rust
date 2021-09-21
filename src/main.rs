@@ -1,10 +1,10 @@
 #![recursion_limit = "256"]
 
-use actix_web::{ http, middleware, web, App, HttpResponse, HttpServer, Result };
+use actix_web::{http, middleware, web, App, HttpResponse, HttpServer, Result};
 use futures::StreamExt;
 
 use serde::{Deserialize, Serialize};
-use serde_json::{Value, json};
+use serde_json::{json, Value};
 
 #[derive(Serialize, Deserialize)]
 struct Message_to_skills {
@@ -29,7 +29,7 @@ struct Message_to_skills_payload {
 
 #[derive(Serialize, Deserialize, Debug)]
 struct Message {
-  original_text: String,
+    original_text: String,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -104,7 +104,6 @@ async fn app_connector(mut payload: web::Payload) -> Result<HttpResponse> {
         .body(res_json.to_string()))
 }
 
-
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
@@ -118,4 +117,3 @@ async fn main() -> std::io::Result<()> {
     .run()
     .await
 }
-
